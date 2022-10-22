@@ -28,12 +28,14 @@ class ProductType extends AbstractType
             'label' => 'Codigo',
             'attr' => [
                 'class' => 'form-control',
+                'required' => true,
             ],
         ])
         ->add('description', TextareaType::class,[
             'label' => 'Descripción',
             'attr' => [
                 'class' => 'form-control',
+                'required' => true,
             ],
         ])
         ->add('brand', TextType::class,
@@ -41,12 +43,14 @@ class ProductType extends AbstractType
             'label' => 'Marca',
             'attr' => [
                 'class' => 'form-control',
+                'required' => true,
             ],
         ])
         ->add('price',  IntegerType::class, [
             'label' => 'Precio',
             'attr' => [
                 'class' => 'form-control',
+                'required' => true,
             ],
         ])
         ->add('createdAt', DateType::class, array(
@@ -54,6 +58,7 @@ class ProductType extends AbstractType
             'widget' => 'single_text',
             'attr' => [
                 'class' => 'form-control',
+                'required' => true,
             ],
         ))
       //traer categorias 
@@ -63,6 +68,7 @@ class ProductType extends AbstractType
         'choice_value' => 'id',
         'attr' => [
             'class' => 'form-control',
+            'required' => true,
         ],
      ])
         ->add('submit', SubmitType::class, [
