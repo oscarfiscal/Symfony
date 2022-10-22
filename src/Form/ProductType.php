@@ -28,14 +28,23 @@ class ProductType extends AbstractType
             'label' => 'Codigo',
             'attr' => [
                 'class' => 'form-control',
-                'required' => true,
+                'placeholder' => 'Ingrese el codigo del producto',
+                'novalidate' => 'novalidate'
+            ],
+        ])
+        ->add('name', TextType::class,[
+            'label' => 'Nombre',
+            'attr' => [
+                'class' => 'form-control',
+                'placeholder' => 'Ingrese el nombre del producto',
+                'novalidate' => 'novalidate',
             ],
         ])
         ->add('description', TextareaType::class,[
             'label' => 'Descripción',
             'attr' => [
                 'class' => 'form-control',
-                'required' => true,
+                'placeholder' => 'Ingrese la descripción del producto',
             ],
         ])
         ->add('brand', TextType::class,
@@ -43,14 +52,14 @@ class ProductType extends AbstractType
             'label' => 'Marca',
             'attr' => [
                 'class' => 'form-control',
-                'required' => true,
+                'placeholder' => 'Ingrese la marca del producto',
             ],
         ])
         ->add('price',  IntegerType::class, [
             'label' => 'Precio',
             'attr' => [
                 'class' => 'form-control',
-                'required' => true,
+                'placeholder' => 'Ingrese el precio del producto',
             ],
         ])
         ->add('createdAt', DateType::class, array(
@@ -58,7 +67,7 @@ class ProductType extends AbstractType
             'widget' => 'single_text',
             'attr' => [
                 'class' => 'form-control',
-                'required' => true,
+                'placeholder' => 'Ingrese la fecha de creación del producto',
             ],
         ))
       //traer categorias 
@@ -68,7 +77,6 @@ class ProductType extends AbstractType
         'choice_value' => 'id',
         'attr' => [
             'class' => 'form-control',
-            'required' => true,
         ],
      ])
         ->add('submit', SubmitType::class, [

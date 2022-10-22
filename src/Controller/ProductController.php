@@ -36,7 +36,6 @@ class ProductController extends AbstractController
             $this->addFlash('notice', 'Producto creado correctamente');
             return $this->redirectToRoute('product');
         }
-
         return $this->render('product/create.html.twig', [
             'form' => $form->createView(),
         ]);
