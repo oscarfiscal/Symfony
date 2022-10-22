@@ -12,7 +12,11 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+  
     private ?int $id = null;
+
+    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'category')]
+    private $products;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
@@ -25,6 +29,16 @@ class Category
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
+
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
 
     public function getId(): ?int
     {
