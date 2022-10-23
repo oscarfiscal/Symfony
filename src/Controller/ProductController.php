@@ -47,13 +47,26 @@ class ProductController extends AbstractController
     }
 
     #[Route('/update/{id}', name: 'product_update')]
-    public function editProduct(Request $request, PersistenceManagerRegistry $doctrine, $id)
+    public function editProduct(Request $request, PersistenceManagerRegistry $doctrine,ProductRepository $product, $id)
     {
-       
+        $product = $product->find($id);
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $product = $form->getData();
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($product);
+            $entityManager->flush();
+            $this->addFlash('notice', 'Producto actualizado correctamente');
+            return $this->redirectToRoute('product');
+        }
+        return $this->render('product/update.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     #[Route('/delete/{id}', name: 'product_delete')]
-    public function deleteProduct(Request $request, PersistenceManagerRegistry $doctrine, $id)
+    public function deleteProduct(Request $request, $id)
     {
        
     }

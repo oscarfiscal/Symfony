@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<div class="container">
+   <div class="row">
+      <h3 class="mt-5 mb-5">Actualizar  Producto</h3>
+      {% for message in app.flashes('notice') %}
+      <div class="alert alert-primary" role="alert">
+    {{ message }}
+</div>
+        {% endfor %}
+    <div class="col-md-6 offset-md-3">
+      {{form_start(form)}}
+      
+      {{form_end(form)}}
+      </div>
+
+    </div>
+</div>
+{% endblock %}
