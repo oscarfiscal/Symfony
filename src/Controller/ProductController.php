@@ -9,21 +9,31 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Product;
 use App\Form\ProductType;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
-
 use App\Repository\ProductRepository;
+// Include paginator interface
+use Knp\Component\Pager\PaginatorInterface;
 
 
 class ProductController extends AbstractController
 {
     #[Route('/product', name: 'product')]
-    public function index(ProductRepository $product): Response
+    
+    public function index(ProductRepository $product, PaginatorInterface $paginator, Request $request): Response
     {
       
-       $listProduct = $product->findAll();
+        $query = $product->findAllProducts();
+
+        $listProducts = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            5 /*limit per page*/
+        );
+
         return $this->render('product/index.html.twig', [
-           'list' => $listProduct,
+           'listProducts' => $listProducts,
         ]);
     }
+    
 
     #[Route('/create', name: 'create')]
 
