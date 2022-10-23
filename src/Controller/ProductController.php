@@ -66,8 +66,15 @@ class ProductController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'product_delete')]
-    public function deleteProduct(Request $request, $id)
+
+    public function deleteProduct(PersistenceManagerRegistry $doctrine, $id)
     {
+        $entityManager = $doctrine->getManager();
+        $product = $entityManager->getRepository(Product::class)->find($id);
+        $entityManager->remove($product);
+        $entityManager->flush();
+        $this->addFlash('success', 'Producto eliminado correctamente');
+        return $this->redirectToRoute('product');
        
     }
 }
