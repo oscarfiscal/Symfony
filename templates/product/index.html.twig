@@ -5,7 +5,11 @@
 
 
 
-<div class="container">
+ 
+<div class="container pt-5" >
+  <button type="button" class="btn btn-labeled btn-success">
+          <a class="nav-link" href="{{path('create')}}"> Crear Product</a> </button>
+        </li>
 {% for message in app.flashes('success') %}
 <div class="alert alert-success">
 {{ message }}
