@@ -1,20 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/symfony/src/Controller/ProductController.php'|file_link(0) }}">src/Controller/ProductController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/symfony/templates/product/index.html.twig'|file_link(0) }}">templates/product/index.html.twig</a></code></li>
-    </ul>
+
+<div class="container">
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Codigo</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Marca</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Fecha De Creacion</th>
+      <th scope="col">Categoria</th>
+        <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for listProduct in list %}
+    <tr>
+      <th scope="row">{{listProduct.id}}</th>
+      <td>{{listProduct.code}}</td>
+      <td>{{listProduct.name}}</td>
+      <td>{{listProduct.description}}</td>
+      <td>{{listProduct.brand}}</td>
+      <td>{{listProduct.price}}</td>
+        <td>{{listProduct.createdAt|date('Y-m-d')}}</td>
+        <td>{{listProduct.category.name}}</td>
+        <td>
+            <a href="{{path('product_update', {'id': listProduct.id})}}" class="btn btn-primary">Editar</a>
+            <a href="{{path('product_delete', {'id': listProduct.id})}}" class="btn btn-danger">Eliminar</a>
+        </td>
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
 </div>
 {% endblock %}

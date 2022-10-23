@@ -10,14 +10,18 @@ use App\Entity\Product;
 use App\Form\ProductType;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 
+use App\Repository\ProductRepository;
+
 
 class ProductController extends AbstractController
 {
     #[Route('/product', name: 'product')]
-    public function index(): Response
+    public function index(ProductRepository $product): Response
     {
+      
+       $listProduct = $product->findAll();
         return $this->render('product/index.html.twig', [
-            'controller_name' => 'ProductController',
+           'list' => $listProduct,
         ]);
     }
 
@@ -40,5 +44,17 @@ class ProductController extends AbstractController
             'form' => $form->createView(),
         ]);
     
+    }
+
+    #[Route('/update/{id}', name: 'product_update')]
+    public function editProduct(Request $request, PersistenceManagerRegistry $doctrine, $id)
+    {
+       
+    }
+
+    #[Route('/delete/{id}', name: 'product_delete')]
+    public function deleteProduct(Request $request, PersistenceManagerRegistry $doctrine, $id)
+    {
+       
     }
 }
